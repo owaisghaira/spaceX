@@ -1,34 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { LaunchListQuery } from "../../generated/graphql";
 import { Layout, Menu, Typography } from "antd";
-import {
-  UserOutlined,
-  LaptopOutlined,
-  NotificationOutlined,
-} from "@ant-design/icons";
+import MissionInfo from "../missionInfo";
 
 const { SubMenu } = Menu;
 const { Title } = Typography;
-const { Header, Content, Footer, Sider } = Layout;
+const { Header, Content, Sider } = Layout;
 
 interface props {
   data: LaunchListQuery;
 }
-{
-  /* <ul>
-    {data.launches?.map((obj,id)=>(
-        <li key={id}>
-            {obj?.mission_name} ({obj?.launch_year})
-        </li>
-    ))}
-</ul> */
-}
+
+
 const MissionList: React.FC<props> = ({ data }) => {
+  const [id, setId] = useState(1);
+  
   return (
     <div>
       <Layout>
         <Header className="header">
-              <Title level={1} type="secondary"> Space X</Title>
+         {/* <Title style={{color:'#fff',padding:'5px'}}>Space X</Title> */}
+         <img width='250px' src={'http://assets.stickpng.com/images/5842a770a6515b1e0ad75afe.png'} alt="logo" />
         </Header>
         <Content style={{ padding: "0 50px" }}>
           <Layout
@@ -44,7 +36,10 @@ const MissionList: React.FC<props> = ({ data }) => {
               >
                 <SubMenu key="sub1" title="Missions">
                   {data.launches?.map((obj, id) => (
-                    <Menu.Item key="id">
+                    <Menu.Item
+                      key={id}
+                      onClick={() => setId(obj?.flight_number!)}
+                    >
                       {obj?.mission_name} ({obj?.launch_year})
                     </Menu.Item>
                   ))}
@@ -52,7 +47,7 @@ const MissionList: React.FC<props> = ({ data }) => {
               </Menu>
             </Sider>
             <Content style={{ padding: "0 24px", minHeight: 280 }}>
-              Content
+              <MissionInfo id={id} />
             </Content>
           </Layout>
         </Content>

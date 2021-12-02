@@ -11,7 +11,7 @@ const Mission = () => {
   if (error || !data) {
     return <h3>Error</h3>;
   }
-console.log(data)
+// console.log(data)
   return <MissionList data={data} />;
 };
 

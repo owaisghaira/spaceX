@@ -1,4 +1,6 @@
 import Mission from "./mission";
-import MissionInfo from "./missionInfo";
+import Missioninfo from "./missionInfo";
 
-export{Mission,MissionInfo}
+export {Mission,
+    Missioninfo
+}
